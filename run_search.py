@@ -62,6 +62,7 @@ def run_search(problem, search_function, parameter=None):
     print("{}\n".format(ip))
     show_solution(node, end - start)
     print()
+    return node 
 
 
 def manual():
@@ -89,7 +90,8 @@ def main(p_choices, s_choices):
 
     problems = [PROBLEMS[i-1] for i in map(int, p_choices)]
     searches = [SEARCHES[i-1] for i in map(int, s_choices)]
-
+    solutions = []
+    j = 0
     for pname, p in problems:
 
         for sname, s, h in searches:
@@ -98,7 +100,12 @@ def main(p_choices, s_choices):
 
             _p = p()
             _h = None if not h else getattr(_p, h)
-            run_search(_p, s, _h)
+
+
+            solutions[j] = run_search(_p, s, _h)
+            j += 1
+    return solutions
+
 
 
 def show_solution(node, elapsed_time):
